@@ -28,4 +28,21 @@ services:
         target: 8000
     volumes:
       - ./backend:/root/backend:cached
-    
+    depends_on:
+      - database
+  database:
+    image: postgres
+    ports:
+      - protocol: tcp
+        published: 5432
+        target: 5432
+    environment:
+      - POSTGRES_DB=feedKU
+      - POSTGRES_USER=Ratchaphon111
+      - POSTGRES_PASSWORD=Nueng111
+    volumes:
+      - './backenddatabasePostgres:/var/lib/postgresql/data'
+
+volumes:
+  databasePostgres:
+    driver: local
